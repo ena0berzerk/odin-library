@@ -11,13 +11,58 @@
     <div class="container">
       <h1>Library</h1>
 
-      <table>
-        Hello
-      </table>
+      <main>
+        <button class="add-book-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          Add New Book
+        </button>
+        <div class="table-block">
+          <table>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Pages</th>
+              <th>Read</th>
+              <th>Remove</th>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-window">
+          <div class="modal-content">
+            <span class="close">x</span>
+            <h2>Add new book</h2>
+            <form action="#">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" />
 
-      <footer>
+              <label for="author">Author</label>
+              <input type="text" name="author" id="author" />
+
+              <label for="pages">Pages</label>
+              <input type="text" name="pages" id="pages" />
+
+              <label for="read">
+                Read
+                <input type="checkbox" name="read" id="read" />
+              </label>
+              <button type="button">Add</button>
+            </form>
+          </div>
+        </div>
+      </main>
+
+      <!-- <footer>
         <small class="copyright"> &copy; 2023 Powered by Enduraev N.</small>
-      </footer>
+      </footer> -->
     </div>
   </body>
 </html>
