@@ -36,11 +36,11 @@
             </tr>
           </table>
         </div>
-        <div class="modal-window">
+        <div class="modal-window hidden">
           <div class="modal-content">
             <span class="close">x</span>
             <h2>Add new book</h2>
-            <form action="#">
+            <form class="modal-form" action="#">
               <label for="title">Title</label>
               <input type="text" name="title" id="title" />
 
@@ -48,12 +48,13 @@
               <input type="text" name="author" id="author" />
 
               <label for="pages">Pages</label>
-              <input type="text" name="pages" id="pages" />
+              <input type="number" min="1" name="pages" id="pages" />
 
-              <label for="read">
-                Read
+              <label for="read" id="label-read">
+                <span>Read</span>
                 <input type="checkbox" name="read" id="read" />
               </label>
+
               <button type="button">Add</button>
             </form>
           </div>
