@@ -106,9 +106,42 @@ th {
   border-radius: 5px;
 }
 
-form {
+.modal-content h2 {
+  text-align: center;
+  margin: 8px 0 18px;
+  text-transform: uppercase;
+}
+
+.modal-form {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.modal-form input {
+  margin-top: 4px;
+  padding: 5px;
+}
+
+.modal-form input:last-child {
+  margin-top: 0;
+}
+
+.modal-form label {
+  margin-top: 12px;
+}
+
+.modal-form label:first-child {
+  margin-top: 0;
+}
+
+.modal-form button {
+  margin: 12px 0;
+  cursor: pointer;
+  padding: 5px 10px;
+  width: 100px;
+  margin-left: auto;
 }
 
 .close {
@@ -118,7 +151,7 @@ form {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .hidden {
@@ -130,3 +163,6 @@ form {
   flex-shrink: 0;
   text-align: center;
 } */
+
+/* transition for modal */
+/* transition: opacity 0.15s ease-out, width 0s linear 0.15s, height 0s linear 0.15s; */
