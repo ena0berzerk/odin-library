@@ -64,7 +64,6 @@ main {
 }
 
 .table-block table {
-  border: 1px solid black;
   border-collapse: collapse;
   letter-spacing: 0.8px;
 }
