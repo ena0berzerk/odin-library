@@ -14,36 +14,36 @@ const wh40k = new Book('The Horus Heresy', 'Dan Abnett', '6520', 'yes');
 
 const myLibrary = [lotr, wh40k];
 
-function showModalNewBook() {
+const modalWindow = document.querySelector('.modal-window');
+function openModal() {
   const addNewBookBtn = document.querySelector('.add-book-btn');
-  const modalWindow = document.querySelector('.modal-window');
-  const closeBtn = document.querySelector('.close');
-
   addNewBookBtn.addEventListener('click', () => {
     modalWindow.classList.remove('hidden');
+  });
+  closeModal();
+}
+openModal();
 
-    closeBtn.addEventListener('click', () => {
-      closeModal();
-    });
+function closeModal() {
+  const closeBtn = document.querySelector('.close');
+  modalWindow.classList.add('hidden');
 
-    window.addEventListener('click', e => {
-      if (e.target === modalWindow) {
-        closeModal();
-      }
-    });
-
-    window.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
-    });
+  closeBtn.addEventListener('click', () => {
+    closeModal();
   });
 
-  function closeModal() {
-    return modalWindow.classList.add('hidden');
-  }
+  window.addEventListener('click', e => {
+    if (e.target === modalWindow) {
+      closeModal();
+    }
+  });
+
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
 }
-showModalNewBook();
 
 function getDataFromForm() {
   const form = document.querySelector('.modal-form');
@@ -62,11 +62,14 @@ function getDataFromForm() {
     myLibrary.push(convertDataToInstantiateObject);
     console.log(myLibrary);
     e.preventDefault();
+
+    closeModal();
+    form.reset();
   });
 }
 getDataFromForm();
 
-function showBookInTable() {
+function showInitialBookTable() {
   for (const i in myLibrary) {
     const table = document.querySelector('table');
     const tr = document.createElement('tr');
@@ -79,4 +82,4 @@ function showBookInTable() {
     }
   }
 }
-showBookInTable();
+showInitialBookTable();
