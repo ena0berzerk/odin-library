@@ -9,10 +9,7 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
 };
 
-const lotr = new Book('The Lord of The Rings', 'J.J.R Tolkien', '431', 'no');
-const wh40k = new Book('The Horus Heresy', 'Dan Abnett', '6520', 'yes');
-
-const myLibrary = [lotr, wh40k];
+const myLibrary = [];
 
 const modalWindow = document.querySelector('.modal-window');
 function openModal() {
@@ -53,33 +50,63 @@ function getDataFromForm() {
   const read = document.querySelector('#read');
 
   form.addEventListener('submit', e => {
+    const table = document.querySelector('.table-block');
+    const tr = document.querySelector('tr');
+
+    table.classList.remove('hidden');
     const convertDataToInstantiateObject = new Book(
       title.value,
       author.value,
       pages.value,
-      `${read.checked ? 'yes' : 'no'}`
+      `${read.checked ? 'read' : 'unread'}`
     );
+
     myLibrary.push(convertDataToInstantiateObject);
-    console.log(myLibrary);
+    console.log(
+      `Log info: Book ${convertDataToInstantiateObject.title} successfully added in array`
+    );
     e.preventDefault();
 
     closeModal();
     form.reset();
+
+    addNewBookToTable(convertDataToInstantiateObject);
   });
 }
 getDataFromForm();
 
-function showInitialBookTable() {
-  for (const i in myLibrary) {
-    const table = document.querySelector('table');
-    const tr = document.createElement('tr');
-    table.appendChild(tr);
-    const objValue = Object.values(myLibrary[i]);
-    for (const value in objValue) {
-      const td = document.createElement('td');
-      td.textContent = objValue[value];
-      tr.appendChild(td);
-    }
+function addNewBookToTable(newBook) {
+  const table = document.querySelector('table');
+  const tr = document.createElement('tr');
+  tr.classList.add('row-book');
+
+  table.appendChild(tr);
+  const objValue = Object.values(newBook);
+
+  for (let i = 0; i < objValue.length; i++) {
+    const td = document.createElement('td');
+    td.textContent = objValue[i];
+    tr.appendChild(td);
   }
+
+  // adding unique data-attr for each book and DOM btn
+  const trBook = document.querySelectorAll('.row-book');
+  const lastTrElement = document.querySelectorAll('.row-book:last-child');
+  trBook.forEach((item, i) => {
+    const numberBook = (item.dataset.book = i);
+  });
+  lastTrElement.forEach((item, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = 'del';
+    btn.setAttribute('style', 'padding: 12px; cursor: pointer');
+    item.appendChild(btn);
+
+    btn.addEventListener('click', e => {
+      // https://www.geeksforgeeks.org/remove-elements-from-a-javascript-array/
+      // book = books.filter((book) => book.id !== clickedbook.id
+      console.log(item.dataset.book);
+      const filtered = myLibrary.filter(item.dataset);
+      console.log(filtered);
+    });
+  });
 }
-showInitialBookTable();
