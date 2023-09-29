@@ -11,7 +11,7 @@ Book.prototype.info = function () {
 };
 
 Book.prototype.toggleReadStatus = function () {
-  return (this.read = this.read === 'read' ? (this.read = false) : (this.read = true));
+  return this.read ? (this.read = false) : (this.read = true);
 };
 
 let myLibrary = [];
@@ -56,18 +56,16 @@ function getDataFromForm() {
 
   form.addEventListener('submit', e => {
     const table = document.querySelector('.table-block');
-    const tr = document.querySelector('tr');
 
     table.classList.remove('hidden');
     const convertDataToInstantiateObject = new Book(
       title.value,
       author.value,
       pages.value,
-      // read.checked,
-      `${read.checked ? 'read' : 'unread'}`,
+      read.checked,
+      // `${read.checked = read.checked ===  ? read : !!unread}`,
       (id = self.crypto.randomUUID())
     );
-
     myLibrary.push(convertDataToInstantiateObject);
     e.preventDefault();
 
@@ -94,8 +92,10 @@ function addNewBookToTable(newBook) {
     tr.appendChild(td);
   }
 
-  // adding unique data-attr for each book and DOM btn
   const lastTrElement = document.querySelector('.row-book:last-child');
+
+  // previousElementSiblingOfReadBtnInitial.textContent =
+  //   previousElementSiblingOfReadBtnInitial === 'true' ? 'Read' : 'Unread';
 
   const readBtn = document.createElement('button');
   readBtn.classList.add('read-btn');
@@ -103,17 +103,14 @@ function addNewBookToTable(newBook) {
   readBtn.setAttribute('style', 'padding: 12px; cursor: pointer');
   lastTrElement.appendChild(readBtn);
 
+  // change initial text to 'read/unread' when get data from form instead of 'true/false'
+  readBtn.previousElementSibling.textContent =
+    readBtn.previousElementSibling.textContent === 'true' ? 'read' : 'unread';
+
   readBtn.addEventListener('click', e => {
-    newBook.toggleReadStatus();
     let textBtn = e.target.previousElementSibling.textContent;
     e.target.previousElementSibling.textContent = textBtn === 'read' ? 'unread' : 'read';
-    // for (const bookEl of myLibrary) {
-    //   if (bookEl.read === true) {
-    //     e.target.previousElementSibling.textContent = 'read';
-    //   } else if (bookEl.read === false) {
-    //     e.target.previousElementSibling.textContent = 'unread';
-    //   }
-    // }
+    newBook.toggleReadStatus();
   });
 
   const delBtn = document.createElement('button');
@@ -123,45 +120,13 @@ function addNewBookToTable(newBook) {
   lastTrElement.appendChild(delBtn);
 
   delBtn.parentElement.dataset.book = id;
-
   delBtn.addEventListener('click', e => {
     // removeFromLibrary(e);
   });
 }
-// https://discord.com/channels/505093832157691914/1047145823101779968
 /* 
 - Проходим циклом через массив myLibrary
 - Делаем проверку, ЕСЛИ на одной из книг id === значению атрибута data-book 
 - ТО удали 1 элемент сплайсом из массива myLibrary начиная с истинного (true) индекса
 - Удали строку книги через кнопку на которую нажали e.target.parentNode
 */
-// function removeFromLibrary(e) {
-//   for (let i = 0; i < myLibrary.length; i++) {
-//     if (myLibrary[i].id === e.target.parentNode.getAttribute('data-book')) {
-//       myLibrary.splice(i, 1);
-//       e.target.parentNode.remove();
-//     }
-//   }
-// }
-
-// this func works fine but only in one first cell. how can i make it work with each book row?
-function readBtnStatus(e) {
-  // const readCell = document.querySelector('.row-book:nth-child(n)');
-  // const tdid = document.querySelector('td:last-of-type');
-  // console.log(tdid);
-  // for (let i = 0; i < myLibrary.length; i++) {
-  //   if (
-  //     myLibrary[i].id === e.target.parentNode.getAttribute('data-book') &&
-  //     myLibrary[i].read === 'read'
-  //   ) {
-  //     myLibrary[i].read = 'unread';
-  //     read.textContent = 'unread';
-  //   } else if (
-  //     myLibrary[i].id === e.target.parentNode.getAttribute('data-book') &&
-  //     myLibrary[i].read === 'unread'
-  //   ) {
-  //     myLibrary[i].read = 'read';
-  //     read.textContent = 'read';
-  //   }
-  // }
-}
