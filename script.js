@@ -1,15 +1,20 @@
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
   this.title = title;
   this.author = author;
   this.pages = Number(pages);
   this.read = read;
+  this.id = id;
 }
 
 Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
 };
 
-const myLibrary = [];
+Book.prototype.toggleReadStatus = function () {
+  return (this.read = this.read === 'read' ? (this.read = false) : (this.read = true));
+};
+
+let myLibrary = [];
 
 const modalWindow = document.querySelector('.modal-window');
 function openModal() {
@@ -58,13 +63,12 @@ function getDataFromForm() {
       title.value,
       author.value,
       pages.value,
-      `${read.checked ? 'read' : 'unread'}`
+      // read.checked,
+      `${read.checked ? 'read' : 'unread'}`,
+      (id = self.crypto.randomUUID())
     );
 
     myLibrary.push(convertDataToInstantiateObject);
-    console.log(
-      `Log info: Book ${convertDataToInstantiateObject.title} successfully added in array`
-    );
     e.preventDefault();
 
     closeModal();
@@ -79,34 +83,85 @@ function addNewBookToTable(newBook) {
   const table = document.querySelector('table');
   const tr = document.createElement('tr');
   tr.classList.add('row-book');
-
   table.appendChild(tr);
-  const objValue = Object.values(newBook);
 
-  for (let i = 0; i < objValue.length; i++) {
+  const objValue = Object.values(newBook);
+  console.log(objValue);
+
+  for (let i = 0; i < objValue.length - 1; i++) {
     const td = document.createElement('td');
     td.textContent = objValue[i];
     tr.appendChild(td);
   }
 
   // adding unique data-attr for each book and DOM btn
-  const trBook = document.querySelectorAll('.row-book');
-  const lastTrElement = document.querySelectorAll('.row-book:last-child');
-  trBook.forEach((item, i) => {
-    const numberBook = (item.dataset.book = i);
-  });
-  lastTrElement.forEach((item, i) => {
-    const btn = document.createElement('button');
-    btn.textContent = 'del';
-    btn.setAttribute('style', 'padding: 12px; cursor: pointer');
-    item.appendChild(btn);
+  const lastTrElement = document.querySelector('.row-book:last-child');
 
-    btn.addEventListener('click', e => {
-      // https://www.geeksforgeeks.org/remove-elements-from-a-javascript-array/
-      // book = books.filter((book) => book.id !== clickedbook.id
-      console.log(item.dataset.book);
-      const filtered = myLibrary.filter(item.dataset);
-      console.log(filtered);
-    });
+  const readBtn = document.createElement('button');
+  readBtn.classList.add('read-btn');
+  readBtn.textContent = 'read';
+  readBtn.setAttribute('style', 'padding: 12px; cursor: pointer');
+  lastTrElement.appendChild(readBtn);
+
+  readBtn.addEventListener('click', e => {
+    newBook.toggleReadStatus();
+    let textBtn = e.target.previousElementSibling.textContent;
+    e.target.previousElementSibling.textContent = textBtn === 'read' ? 'unread' : 'read';
+    // for (const bookEl of myLibrary) {
+    //   if (bookEl.read === true) {
+    //     e.target.previousElementSibling.textContent = 'read';
+    //   } else if (bookEl.read === false) {
+    //     e.target.previousElementSibling.textContent = 'unread';
+    //   }
+    // }
   });
+
+  const delBtn = document.createElement('button');
+  delBtn.classList.add('del-btn');
+  delBtn.textContent = 'del';
+  delBtn.setAttribute('style', 'padding: 12px; cursor: pointer');
+  lastTrElement.appendChild(delBtn);
+
+  delBtn.parentElement.dataset.book = id;
+
+  delBtn.addEventListener('click', e => {
+    // removeFromLibrary(e);
+  });
+}
+// https://discord.com/channels/505093832157691914/1047145823101779968
+/* 
+- Проходим циклом через массив myLibrary
+- Делаем проверку, ЕСЛИ на одной из книг id === значению атрибута data-book 
+- ТО удали 1 элемент сплайсом из массива myLibrary начиная с истинного (true) индекса
+- Удали строку книги через кнопку на которую нажали e.target.parentNode
+*/
+// function removeFromLibrary(e) {
+//   for (let i = 0; i < myLibrary.length; i++) {
+//     if (myLibrary[i].id === e.target.parentNode.getAttribute('data-book')) {
+//       myLibrary.splice(i, 1);
+//       e.target.parentNode.remove();
+//     }
+//   }
+// }
+
+// this func works fine but only in one first cell. how can i make it work with each book row?
+function readBtnStatus(e) {
+  // const readCell = document.querySelector('.row-book:nth-child(n)');
+  // const tdid = document.querySelector('td:last-of-type');
+  // console.log(tdid);
+  // for (let i = 0; i < myLibrary.length; i++) {
+  //   if (
+  //     myLibrary[i].id === e.target.parentNode.getAttribute('data-book') &&
+  //     myLibrary[i].read === 'read'
+  //   ) {
+  //     myLibrary[i].read = 'unread';
+  //     read.textContent = 'unread';
+  //   } else if (
+  //     myLibrary[i].id === e.target.parentNode.getAttribute('data-book') &&
+  //     myLibrary[i].read === 'unread'
+  //   ) {
+  //     myLibrary[i].read = 'read';
+  //     read.textContent = 'read';
+  //   }
+  // }
 }
