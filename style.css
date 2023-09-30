@@ -1,3 +1,12 @@
+/*
+
+Color Pallete:
+Primary: #fbffff
+Second: #30323D
+Accent: #F3C72B
+
+*/
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -7,6 +16,8 @@
 html,
 body {
   font-family: sans-serif;
+  color: #30323d;
+  background-color: #fbffff;
 }
 
 .container {
@@ -42,9 +53,10 @@ main {
   font-size: 14px;
   padding: 8px;
   cursor: pointer;
-  background-color: plum;
+  background-color: hsl(47, 89%, 56%);
+  color: #30323d;
   border-radius: 4px;
-  border: 1px solid purple;
+  border: none;
 }
 
 .add-book-btn:hover {
@@ -72,6 +84,10 @@ main {
 th {
   border: 1px solid #bebebe;
   padding: 10px 20px;
+}
+
+.table-block td {
+  text-align: center;
 }
 
 .table-block th {

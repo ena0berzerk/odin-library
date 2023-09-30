@@ -63,7 +63,6 @@ function getDataFromForm() {
       author.value,
       pages.value,
       read.checked,
-      // `${read.checked = read.checked ===  ? read : !!unread}`,
       (id = self.crypto.randomUUID())
     );
     myLibrary.push(convertDataToInstantiateObject);
@@ -94,16 +93,13 @@ function addNewBookToTable(newBook) {
 
   const lastTrElement = document.querySelector('.row-book:last-child');
 
-  // previousElementSiblingOfReadBtnInitial.textContent =
-  //   previousElementSiblingOfReadBtnInitial === 'true' ? 'Read' : 'Unread';
-
   const readBtn = document.createElement('button');
   readBtn.classList.add('read-btn');
   readBtn.textContent = 'read';
   readBtn.setAttribute('style', 'padding: 12px; cursor: pointer');
   lastTrElement.appendChild(readBtn);
 
-  // change initial text to 'read/unread' when get data from form instead of 'true/false'
+  // change initial text to 'read/unread' when get data from form instead of 'true/false' text
   readBtn.previousElementSibling.textContent =
     readBtn.previousElementSibling.textContent === 'true' ? 'read' : 'unread';
 
@@ -121,12 +117,19 @@ function addNewBookToTable(newBook) {
 
   delBtn.parentElement.dataset.book = id;
   delBtn.addEventListener('click', e => {
-    // removeFromLibrary(e);
+    removeFromLibrary(e);
+    if (myLibrary.length === 0) {
+      const table = document.querySelector('.table-block');
+      table.classList.add('hidden');
+    }
   });
 }
-/* 
-- Проходим циклом через массив myLibrary
-- Делаем проверку, ЕСЛИ на одной из книг id === значению атрибута data-book 
-- ТО удали 1 элемент сплайсом из массива myLibrary начиная с истинного (true) индекса
-- Удали строку книги через кнопку на которую нажали e.target.parentNode
-*/
+
+function removeFromLibrary(book) {
+  for (let i = 0; i < myLibrary.length; i++) {
+    if (myLibrary[i].id === book.target.parentNode.getAttribute('data-book')) {
+      myLibrary.splice(i, 1);
+      book.target.parentNode.remove();
+    }
+  }
+}
