@@ -95,24 +95,24 @@ function addNewBookToTable(newBook) {
 
   const readBtn = document.createElement('button');
   readBtn.classList.add('read-btn');
-  readBtn.textContent = 'read';
-  readBtn.setAttribute('style', 'padding: 12px; cursor: pointer');
+  readBtn.textContent = 'Read Status';
+  readBtn.setAttribute('style', 'margin: 12px 12px; padding: 4px;');
   lastTrElement.appendChild(readBtn);
 
   // change initial text to 'read/unread' when get data from form instead of 'true/false' text
   readBtn.previousElementSibling.textContent =
-    readBtn.previousElementSibling.textContent === 'true' ? 'read' : 'unread';
+    readBtn.previousElementSibling.textContent === 'true' ? 'Read' : 'Unread';
 
   readBtn.addEventListener('click', e => {
     let textBtn = e.target.previousElementSibling.textContent;
-    e.target.previousElementSibling.textContent = textBtn === 'read' ? 'unread' : 'read';
+    e.target.previousElementSibling.textContent = textBtn === 'Read' ? 'Unread' : 'Read';
     newBook.toggleReadStatus();
   });
 
   const delBtn = document.createElement('button');
   delBtn.classList.add('del-btn');
-  delBtn.textContent = 'del';
-  delBtn.setAttribute('style', 'padding: 12px; cursor: pointer');
+  delBtn.textContent = 'Remove Book';
+  delBtn.setAttribute('style', 'padding: 4px;');
   lastTrElement.appendChild(delBtn);
 
   delBtn.parentElement.dataset.book = id;
