@@ -20,7 +20,10 @@ const modalWindow = document.querySelector('.modal-window');
 function openModal() {
   const addNewBookBtn = document.querySelector('.add-book-btn');
   addNewBookBtn.addEventListener('click', () => {
-    modalWindow.classList.remove('hidden');
+    setTimeout(() => {
+      modalWindow.classList.remove('hidden');
+      modalWindow.classList.add('show-modal');
+    }, 100);
   });
   closeModal();
 }
@@ -83,7 +86,6 @@ function addNewBookToTable(newBook) {
   table.appendChild(tr);
 
   const objValue = Object.values(newBook);
-  console.log(objValue);
 
   for (let i = 0; i < objValue.length - 1; i++) {
     const td = document.createElement('td');
@@ -95,7 +97,7 @@ function addNewBookToTable(newBook) {
 
   const readBtn = document.createElement('button');
   readBtn.classList.add('read-btn');
-  readBtn.textContent = 'Read Status';
+  readBtn.textContent = 'Status';
   readBtn.setAttribute('style', 'margin: 12px 12px; padding: 4px;');
   lastTrElement.appendChild(readBtn);
 
@@ -111,7 +113,7 @@ function addNewBookToTable(newBook) {
 
   const delBtn = document.createElement('button');
   delBtn.classList.add('del-btn');
-  delBtn.textContent = 'Remove Book';
+  delBtn.textContent = 'Remove';
   delBtn.setAttribute('style', 'padding: 4px;');
   lastTrElement.appendChild(delBtn);
 

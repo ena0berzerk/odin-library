@@ -30,17 +30,20 @@ button {
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.1fr 3fr 0.5fr;
-  min-height: 100vh;
+  grid-template-rows: 0.1fr 0.1fr 0.1fr 3fr 0.1fr;
+  min-height: 95vh;
   width: 1000px;
-  margin: 0 auto;
-  padding: 24px 0;
+  margin: 24px auto 0 auto;
 }
 
 h1 {
-  margin: 12px 0 34px 0;
+  margin: 24px 0 5px 0;
   grid-column: 1 / -1;
   grid-row: 1 / 2;
+}
+
+.text-info {
+  grid-row: 2 / 3;
 }
 
 main {
@@ -48,7 +51,8 @@ main {
   grid-template-columns: max-content 3fr;
   grid-template-rows: max-content 3fr;
   grid-column: 1 / -1;
-  grid-row: 2 / 3;
+  grid-row: 4 / 5;
+  margin-top: 18px;
 }
 
 .add-book-btn {
@@ -140,7 +144,7 @@ th {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
-  height: 420px;
+  height: 410px;
   padding: 14px;
   color: #fff;
   background-color: hsl(47, 89%, 56%);
@@ -166,6 +170,10 @@ th {
 .modal-form input {
   margin-top: 4px;
   padding: 5px;
+  border-radius: 4px;
+  border: none;
+  outline-offset: -1px;
+  outline-color: hsl(47, 89%, 56%);
 }
 
 .modal-form input:last-child {
@@ -181,6 +189,12 @@ th {
 
 .modal-form label:first-child {
   margin-top: 0;
+}
+
+#read[type='checkbox'] {
+  accent-color: black;
+  position: relative;
+  top: 1px;
 }
 
 .modal-form button {
@@ -199,6 +213,11 @@ th {
   -webkit-user-select: none;
 }
 
+.modal-form button:hover {
+  opacity: 0.9;
+  transition: 300ms;
+}
+
 .close {
   position: relative;
   top: 1%;
@@ -212,12 +231,29 @@ th {
   user-select: none;
 }
 
+.close:hover {
+  opacity: 0.9;
+}
+
 .hidden {
   display: none;
 }
 
-/* footer {
-  display: block;
-  flex-shrink: 0;
+.show-modal {
+  animation: show 0.3s;
+}
+
+@keyframes show {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+footer {
+  grid-row: 5 / 6;
   text-align: center;
-} */
+  user-select: none;
+}

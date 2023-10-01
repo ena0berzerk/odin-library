@@ -11,8 +11,10 @@
   <body>
     <div class="container">
       <h1>Library</h1>
-      <!-- <p>With this app you can easily store and tracking you books that you read.</p> -->
-      <!-- <p>Add button below to add your book and fill the form</p> -->
+      <div class="text-info">
+        <p>With this app you can easily store and tracking you books that you read</p>
+        <p>Click on button below to fill the form and add your book</p>
+      </div>
       <main>
         <button class="add-book-btn">
           <svg
@@ -43,13 +45,13 @@
             <h2>Add new book</h2>
             <form class="modal-form" action="#">
               <label for="title">Title</label>
-              <input value="1" type="text" name="title" id="title" />
+              <input type="text" name="title" id="title" required />
 
               <label for="author">Author</label>
               <input type="text" name="author" id="author" />
 
               <label for="pages">Pages</label>
-              <input type="number" min="1" name="pages" id="pages" />
+              <input type="number" min="1" name="pages" id="pages" required />
 
               <label for="read" id="label-read">
                 <span>Read</span>
@@ -61,9 +63,9 @@
         </div>
       </main>
 
-      <!-- <footer>
+      <footer>
         <small class="copyright"> &copy; 2023 Powered by Enduraev N.</small>
-      </footer> -->
+      </footer>
     </div>
   </body>
 </html>
