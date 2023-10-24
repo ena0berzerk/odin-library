@@ -1,18 +1,20 @@
-function Book(title, author, pages, read, id) {
-  this.title = title;
-  this.author = author;
-  this.pages = Number(pages);
-  this.read = read;
-  this.id = id;
+class Book {
+  constructor(title, author, pages, read, id) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.id = id;
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
+  }
+
+  toggleReadStatus() {
+    return this.read ? (this.read = false) : (this.read = true);
+  }
 }
-
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-};
-
-Book.prototype.toggleReadStatus = function () {
-  return this.read ? (this.read = false) : (this.read = true);
-};
 
 let myLibrary = [];
 
