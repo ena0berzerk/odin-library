@@ -1,12 +1,10 @@
-## Library
+# Library
+![library](https://github.com/ena0berzerk/odin-library/assets/110235307/39def7b9-cbfb-49bb-8021-0ae385ba3c33)
 
-### Created as part of The Odin Project Fullstack Javascript curriculum.
+### Preview
+[Library](https://ena0berzerk.github.io/odin-library)
 
-#### Description
+## Description
 
-A simple project "Library". I used this project to practice constructors and work with DOM
+With this app you can easily store and tracking you books that you read (no local storage yet).
 
-#### Features
-
-- Add and remove books
-- Change read status
