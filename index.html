@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,7 +12,10 @@
     <div class="container">
       <h1>Library</h1>
       <div class="text-info">
-        <p>With this app you can easily store and tracking you books that you read</p>
+        <p>
+          With this app you can easily store and tracking you books that you
+          read
+        </p>
         <p>Click on button below to fill the form and add your book</p>
       </div>
       <main>
@@ -25,7 +28,11 @@
             stroke="currentColor"
             class="w-6 h-6"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
           </svg>
           Add New Book
         </button>
@@ -48,14 +55,14 @@
               <input type="text" name="title" id="title" required />
 
               <label for="author">Author</label>
-              <input type="text" name="author" id="author" />
+              <input type="text" name="author" id="author" required />
 
               <label for="pages">Pages</label>
               <input type="number" min="1" name="pages" id="pages" required />
 
               <label for="read" id="label-read">
                 <span>Read</span>
-                <input type="checkbox" name="read" id="read" />
+                <input type="checkbox" name="read" id="read" required />
               </label>
               <button class="submit-btn" type="submit">Add</button>
             </form>
